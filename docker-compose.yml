@@ -1,0 +1,87 @@
+# version: "3"
+# networks:
+#   vteam:
+# services:
+#   database:
+#     container_name: database
+#     image: mariadb:latest
+#     build:
+#       context: ./database
+#       dockerfile: Dockerfile  # Specify the Dockerfile with the necessary COPY instruction
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: password
+#       MYSQL_DATABASE: vteam
+#       MYSQL_USER: user
+#       MYSQL_PASSWORD: password
+#     ports:
+#       - "3306:3306"
+#     networks:
+#       - vteam
+
+#   # Test the database by excuting: docker exec -it database mariadb -uroot -p
+
+version: "3"
+networks:
+    vteam:
+services:
+  database:
+    container_name: database
+    image: mariadb:latest
+    restart: always
+    volumes:
+      - ./database/:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: classicmodels
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      vteam:
+  node:
+    build:
+      context: ./node
+    ports:
+      - "0.0.0.0:1338:1338"
+    volumes:
+      - ./node:/node
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      vteam:
+
+  php:
+    build:
+      context: ./php
+    ports:
+      - "0.0.0.0:5000:5000"
+    volumes:
+      - ./php:/usr/src/myapp
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      vteam:
+  python:
+    build:
+      context: ./python
+    ports:
+      - "0.0.0.0:8000:8000"
+    volumes:
+      - ./python:/python
+    networks:
+      vteam:
+    depends_on:
+      database:
+        condition: service_healthy
+
+  # Test the database by excuting: docker exec -it database mariadb -uroot -p
+  
