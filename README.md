@@ -7,7 +7,7 @@ Selection
 
 **Node.js** and *JavaScript* is the language of choice for many developers as it can be used for both frontend and backend sides of the application. This is seen to simplify the development process significantly.
 
-**PHP** has been a popular choice for backend web development for many years. Like Python, it is also seen as easy to learn.
+**PHP** has been a popular choice for backend web development for many years. Like Python, it is also considered easy to learn.
 
 **Python** is a popular language with a large and supportive community of users. It is a popular choice for manipulating databases since it is used in mathematical and scientific analysis.
 
@@ -15,7 +15,7 @@ Selection
 
 Method
 -----------------------
-**Docker** will be used to containerise the database and each of the environments for *Node.js*, *PHP*, and *Python*. A large example database collected from MySQLTutorial was used for this study [[1]]. A "healthcheck" in the *docker-compose.yml* file was used in order to ensure that its condition is "healthy" before the *node*, *python*, or *php* services are executed. 
+**Docker** will be used to containerise the database and each of the environments for *Node.js*, *PHP*, and *Python*. A large example database collected from MySQLTutorial was used for this study [[1]]. A "healthcheck" in the *docker-compose.yml* file was used in order to ensure that the database's condition was "healthy" before the *node*, *python*, or *php* services were executed. 
 
 The documentation for MariaDB [[2]] and Node.js was invaluable in setting up the connection between them. The Dockerfile is also easy to set-up and uses a very straightforward template image for Node.js [[3]]. At 1.27GB, the image on Docker is the largest of the three.
 
@@ -94,15 +94,17 @@ From the results of the above tests, it is apparent that *PHP* is fastest at con
 
 Due to its asynchronous nature, *Node.js* was not as efficient as the other two, especially when connecting to the database. It was also the largest image of the three.
 
-PHP was narrowly beaten by *Python* - by 1.04 points - when using a `DELETE` query. There was not differentiation between the other queries, except for connecting to the database.
+PHP was narrowly beaten by *Python* - by 1.04 points - when using a `DELETE` query. There was not much differentiation between the other queries, except for connecting to the database.
 
 Conclusion
 -----------------------
-*PHP*, from the results above, appears to the outright 'winner' of this study. In almost all tests it beats both *Node.js* and *Python*. Although there appears to be not that much differentiation between PHP and Python, this could in the end result in longer delays if many queries are made. 
+*PHP*, from the results above, appears to the outright 'winner' of this study. In almost all tests it beats both *Node.js* and *Python*. Although there appears to be not much differentiation between PHP and Python, this could in the end result in longer delays if many queries are made. 
 
 When choosing a language to work with databases, it also important to consider the ease of development. From my experience in this study, *PHP* was by the easiest to set-up especially compared to Python. It was also the most lightweight.
 
-Since most developers will not be choosing a language solely on querying databases alone, it also important to consider *Node.js*'' ability to handle concurrent connections and its asynchronicity. PHP is not well suited to real-time applications. 
+Since most developers will not be choosing a language solely on querying databases alone, it also important to consider *Node.js*'' ability to handle concurrent connections and its asynchronicity. PHP is not well suited to real-time applications.
+
+If I were to repeat this study I would ensure to test the database under pressure - creating multiple containers that query using each of the languages under test. Due to the languages' different use cases and advantages, this could lead to different conclusions and recommendations. 
 
 In summary, although *PHP* is fastest out of the results of these tests, developers may still wish to consider *Node.js* due to its benefits for some larger or complex web applications.
 
