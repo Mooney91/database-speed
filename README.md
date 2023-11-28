@@ -100,7 +100,7 @@ Conclusion
 -----------------------
 *PHP*, from the results above, appears to the outright 'winner' of this study. In almost all tests it beats both *Node.js* and *Python*. Although there appears to be not much differentiation between PHP and Python, this could in the end result in longer delays if many queries are made. 
 
-When choosing a language to work with databases, it also important to consider the ease of development. From my experience in this study, *PHP* was by the easiest to set-up especially compared to Python. It was also the most lightweight.
+When choosing a language to work with databases, it also important to consider the ease of development. From my experience in this study, *PHP* was by far the easiest to set-up especially compared to Python. It was also the most lightweight.
 
 Since most developers will not be choosing a language solely on querying databases alone, it also important to consider *Node.js*'' ability to handle concurrent connections and its asynchronicity. PHP is not well suited to real-time applications.
 
